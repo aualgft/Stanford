@@ -9,20 +9,10 @@
 import SwiftUI
 
 class MemoryGameThemeViewModel {
-    private var model = MemoryGameThemeDataSource()
     var numberOfThemes = Theme.allCases.count
     
-    func getTheme(theme: Theme) -> [String]{
-        switch theme {
-        case .summer:
-            return model.summer
-        case .winter:
-            return model.winter
-        case .pets:
-            return model.pets
-        case .party:
-            return model.party
-        }
+    func getTheme(theme: Theme) -> ThemeModel {
+        return ThemeModel(theme: theme)
     }
 }
 

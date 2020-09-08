@@ -6,22 +6,29 @@
 //  Copyright © 2020 user159106. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
-struct MemoryGameThemeDataSource {
-    var summer : [String] {
-        return ["🥵","⛱","🏖","⛱"]
-    }
+struct ThemeModel {
+    var color: Color
+    var themeData: [String]
+    var theme: Theme
     
-    var winter : [String] {
-        return ["⛄️","🏂","⛷","🥶"]
-    }
-    
-    var party : [String] {
-        return ["🥳","🎊","🎁","💃"]
-    }
-    
-    var pets : [String] {
-        return ["🐈","🐀","🐕","🦜"]
+    init(theme: Theme) {
+        self.theme = theme
+        switch theme {
+        case .summer:
+            self.themeData =  ["🥵","⛱","🏖","⛱"]
+            self.color = .red
+        case .winter:
+            self.themeData = ["⛄️","🏂","⛷","🥶"]
+            self.color = .blue
+        case .pets:
+            self.themeData = ["🐈","🐀","🐕","🦜"]
+            self.color = .green
+        case .party:
+            self.themeData = ["🥳","🎊","🎁","💃"]
+            self.color = .pink
+        }
     }
 }
+

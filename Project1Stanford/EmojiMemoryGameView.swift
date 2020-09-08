@@ -9,20 +9,26 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-   @ObservedObject var viewModel: EmojyMemoryGame
+    @ObservedObject var viewModel: EmojyMemoryGame
     
     var body: some View {
+        NavigationView {
             Grid(viewModel.cards) {
                 card in
                 CardView(card: card).onTapGesture {
                     self.viewModel.choose(card: card)
                 }
-            .padding(5)
+                .padding(5)
             }
-        
-        .padding()
-        .foregroundColor(Color.orange)
-        .aspectRatio(2/3, contentMode: .fit)
+                
+            .padding()
+            .foregroundColor(viewModel.color)
+            .aspectRatio(2/3, contentMode: .fit)
+            .navigationBarItems(trailing: Button("New Game") {
+                self.viewModel.newGame()
+            })
+            .navigationBarTitle(viewModel.theme.rawValue)
+        }
     }
 }
 
@@ -30,19 +36,19 @@ struct CardView: View {
     var card: MemoryGame<String>.Card
     var body: some View {
         GeometryReader { geomtry in
-        ZStack {
-            if self.card.isFaceUp {
-                RoundedRectangle(cornerRadius: 10).fill(Color.white)
-                RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 3)
-                Text(self.card.content)
-                
-            } else {
-                if !self.card.isMatched {
-                RoundedRectangle(cornerRadius: 10).fill()
+            ZStack {
+                if self.card.isFaceUp {
+                    RoundedRectangle(cornerRadius: 10).fill(Color.white)
+                    RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 3)
+                    Text(self.card.content)
+                    
+                } else {
+                    if !self.card.isMatched {
+                        RoundedRectangle(cornerRadius: 10).fill()
+                    }
                 }
             }
-        }
-        .font(Font.system(size: min(geomtry.size.width, geomtry.size.height) * 0.75))
+            .font(Font.system(size: min(geomtry.size.width, geomtry.size.height) * 0.75))
         }
     }
 }

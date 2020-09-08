@@ -10,10 +10,14 @@ import SwiftUI
 
 struct MemoryGameChooseThemeView: View {
     var model = MemoryGameThemeViewModel()
+    @State private var isActive = false
     var body: some View {
         NavigationView {
                 List(Theme.allCases) { theme in
-                        NavigationLink(destination: EmojiMemoryGameView(viewModel: EmojyMemoryGame())) {
+                    Button("Present") {
+                        self.isActive = self.isActive ? false : true
+                    }
+                        NavigationLink(destination: EmojiMemoryGameView(viewModel: EmojyMemoryGame(theme: theme))) {
                             Text(theme.rawValue)
                     }
                 }
