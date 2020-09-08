@@ -34,6 +34,7 @@ struct CardView: View {
             if self.card.isFaceUp {
                 RoundedRectangle(cornerRadius: 10).fill(Color.white)
                 RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 3)
+                Circle().padding(5).opacity(0.4)
                 Text(self.card.content)
                 
             } else {
@@ -44,5 +45,13 @@ struct CardView: View {
         }
         .font(Font.system(size: min(geomtry.size.width, geomtry.size.height) * 0.75))
         }
+    }
+}
+
+struct EmojiMemoryGameView_Previews: PreviewProvider {
+    static var previews: some View {
+        let game = EmojyMemoryGame()
+        game.choose(card: game.cards[0])
+        return EmojiMemoryGameView(viewModel:game)
     }
 }
