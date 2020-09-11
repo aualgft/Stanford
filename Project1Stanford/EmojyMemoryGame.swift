@@ -12,13 +12,16 @@ class EmojyMemoryGame: ObservableObject {
    @Published private var model: MemoryGame<String> = EmojyMemoryGame.createMemoryGame()
     
     static func createMemoryGame() -> MemoryGame<String> {
-        let emojis: Array<String> = ["👻", "🎃", "🕸"].shuffled()
+        let emojis: Array<String> = ["👻", "🎃", "🕸"]
         let range = Range(2...emojis.count).randomElement()!
         return MemoryGame<String>(numberOfPairsOfCards: range) { pairIndex in
             return emojis[pairIndex]
         }
     }
     
+    func newGame() {
+       model = EmojyMemoryGame.createMemoryGame()
+    }
     
     
     var font : Font {
